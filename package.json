@@ -1,0 +1,82 @@
+{
+  "name": "neonexus-user-mac",
+  "version": "1.0.5",
+  "description": "NeoNexus User App for macOS",
+  "main": "dist/electron/main.js",
+  "author": "NeoNexus Innovations LLP",
+  "private": false,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:electron": "wait-on http://localhost:5173 && tsc -p tsconfig.electron.json && electron .",
+    "build": "npm run build:renderer && npm run build:electron",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win --x64",
+    "dist:mac": "npm run build && electron-builder --mac dmg --x64 --arm64",
+    "dist:mac:test": "npm run build && electron-builder --mac dmg",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.0.0",
+    "concurrently": "^8.0.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.0.0",
+    "oxlint": "^1.58.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.0.0",
+    "wait-on": "^7.0.0",
+    "zustand": "^4.5.0"
+  },
+  "build": {
+    "appId": "io.neonexus.copilot",
+    "productName": "NeoNexus User",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "extraResources": [],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": [{
+        "target": "nsis",
+        "arch": ["x64"]
+      }],
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NeoNexus Copilot"
+    }
+  }
+}

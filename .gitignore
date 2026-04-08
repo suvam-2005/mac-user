@@ -1,0 +1,9 @@
+node_modules/
+dist/
+release/
+src/types/test/
+resources/ffmpeg.exe
+*.log
+.DS_Store
+.env.local
+.env.*.local

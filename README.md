@@ -51,3 +51,16 @@ After first launch, allow:
 2. Screen Recording
 
 Without these permissions, live transcript/help features can fail or be partial.
+
+## Already Configured for macOS
+
+This repository already includes macOS compatibility settings for media features:
+
+1. Electron Builder `mac` target (`dmg`, `x64`, `arm64`)
+2. `NSMicrophoneUsageDescription` in app metadata
+3. `NSScreenCaptureDescription` in app metadata
+4. Hardened runtime + entitlements files:
+	1. `build/entitlements.mac.plist`
+	2. `build/entitlements.mac.inherit.plist`
+
+If you later sign and notarize the app, keep these files as-is unless you have a specific Apple signing policy requirement.

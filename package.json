@@ -14,7 +14,7 @@
     "build:electron": "tsc -p tsconfig.electron.json",
     "dist": "npm run build && electron-builder",
     "dist:win": "npm run build && electron-builder --win --x64",
-    "dist:mac": "npm run build && electron-builder --mac dmg --x64 --arm64",
+    "dist:mac": "npm run build && electron-builder --mac dmg --universal",
     "dist:mac:intel": "npm run build && electron-builder --mac dmg --x64",
     "dist:mac:apple": "npm run build && electron-builder --mac dmg --arm64",
     "dist:mac:universal": "npm run build && electron-builder --mac dmg --universal",
@@ -27,6 +27,7 @@
     "ws": "^8.18.3"
   },
   "devDependencies": {
+    "@electron/notarize": "^2.5.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -46,6 +47,7 @@
   "build": {
     "appId": "io.neonexus.copilot",
     "productName": "NeoNexus User",
+    "afterSign": "scripts/notarize.cjs",
     "directories": {
       "output": "release"
     },
@@ -56,6 +58,7 @@
     ],
     "extraResources": [],
     "mac": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
       "target": [
         {
           "target": "dmg",

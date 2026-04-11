@@ -7,8 +7,6 @@
  * unavailable in the renderer's sandboxed context).
  */
 
-export {};
-
 // Type definitions for streaming
 export interface TranscriptUpdate {
   type: "transcript";

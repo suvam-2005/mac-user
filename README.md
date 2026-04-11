@@ -2,6 +2,8 @@
 
 Standalone user desktop app repository for macOS testing.
 
+Default release command builds a universal DMG so one artifact supports both Intel and Apple Silicon Macs.
+
 ## If You See "Application Is Not Supported On This Mac"
 
 This means the DMG architecture does not match the Mac CPU.
@@ -75,11 +77,13 @@ Universal DMG (single app supporting both Intel and Apple Silicon):
 npm run dist:mac:universal
 ```
 
-Default dual output (build both Intel and Apple Silicon artifacts):
+Default release build:
 
 ```bash
 npm run dist:mac
 ```
+
+Note: `dist:mac` is now universal by default.
 
 ## Build on macOS (Production, signed)
 
@@ -90,6 +94,16 @@ npm run dist:mac
 npm install
 npm run dist:mac
 ```
+
+Environment variables used for notarization:
+
+```bash
+export APPLE_ID="your-apple-id@example.com"
+export APPLE_APP_SPECIFIC_PASSWORD="xxxx-xxxx-xxxx-xxxx"
+export APPLE_TEAM_ID="YOURTEAMID"
+```
+
+If these variables are not set, build still succeeds and notarization is skipped.
 
 ## Runtime Permissions on macOS
 After first launch, allow:

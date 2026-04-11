@@ -15,9 +15,6 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import {
   useStore,
   selectSessionsRemaining,
-  selectIsStreaming,
-  selectCanStartStreaming,
-  TranscriptLine,
 } from '../lib/store';
 import { ChatPanel } from '../components/ChatPanel';
 import { SessionCounter } from '../components/SessionCounter';
@@ -30,9 +27,6 @@ export function Dashboard() {
   const streamingState = useStore((s) => s.streamingState);
   const sessionId = useStore((s) => s.sessionId);
   const liveTranscript = useStore((s) => s.liveTranscript);
-  const interimText = useStore((s) => s.interimText);
-  const isStreaming = useStore(selectIsStreaming);
-  const canStartStreaming = useStore(selectCanStartStreaming);
 
   // ── Store actions ──────────────────────────────────────────────────────────
   const setStreamingState = useStore((s) => s.setStreamingState);
@@ -56,8 +50,8 @@ export function Dashboard() {
   // ── Local state (transient UI only) ────────────────────────────────────────
   const [processing, setProcessing] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [debugInfo, setDebugInfo] = useState('');
-  const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
+  const [_debugInfo, setDebugInfo] = useState('');
+  const [_audioStream, setAudioStream] = useState<MediaStream | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   // ── Refs ───────────────────────────────────────────────────────────────────

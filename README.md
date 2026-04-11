@@ -2,6 +2,21 @@
 
 Standalone user desktop app repository for macOS testing.
 
+## If You See "Application Is Not Supported On This Mac"
+
+This means the DMG architecture does not match the Mac CPU.
+
+1. Check Mac CPU architecture:
+
+```bash
+uname -m
+```
+
+- `x86_64` -> Intel Mac -> use `...-x64.dmg`
+- `arm64` -> Apple Silicon Mac -> use `...-arm64.dmg`
+
+If you installed the wrong one, remove the app and install the matching DMG.
+
 ## Backend Connection
 This app is already configured to use hosted backend API:
 
@@ -33,6 +48,38 @@ npm run dist:mac:test
 ```
 
 Generated DMG is placed in `release/`.
+
+## Build By Architecture
+
+Run on a Mac build machine:
+
+```bash
+npm install
+```
+
+Intel-only DMG:
+
+```bash
+npm run dist:mac:intel
+```
+
+Apple Silicon-only DMG:
+
+```bash
+npm run dist:mac:apple
+```
+
+Universal DMG (single app supporting both Intel and Apple Silicon):
+
+```bash
+npm run dist:mac:universal
+```
+
+Default dual output (build both Intel and Apple Silicon artifacts):
+
+```bash
+npm run dist:mac
+```
 
 ## Build on macOS (Production, signed)
 

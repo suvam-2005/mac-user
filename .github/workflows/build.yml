@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-mac:
+    name: Build universal macOS DMG
     runs-on: macos-latest
 
     steps:
@@ -28,30 +29,15 @@ jobs:
       - name: Set backend URL
         run: echo "VITE_BACKEND_URL=https://api.strategixinsightsadmin.tech" > .env
 
-      - name: Build DMG Intel x64
+      - name: Build universal DMG
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false
           EP_GH_IGNORE_TIME: true
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run dist:mac:intel
+        run: npm run dist:mac
 
-      - name: Build DMG Apple Silicon arm64
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: false
-          EP_GH_IGNORE_TIME: true
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run dist:mac:apple
-
-      - name: Upload Intel DMG
+      - name: Upload universal DMG
         uses: actions/upload-artifact@v4
         with:
-          name: Strategixinsights-mac-intel
-          path: release/*-x64.dmg
-          retention-days: 30
-
-      - name: Upload Apple Silicon DMG
-        uses: actions/upload-artifact@v4
-        with:
-          name: Strategixinsights-mac-arm64
-          path: release/*-arm64.dmg
+          name: Strategixinsights-mac-universal
+          path: release/*-universal.dmg
           retention-days: 30

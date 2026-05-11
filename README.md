@@ -14,6 +14,8 @@ This builds the updated universal DMG and prints the file path from `release/`.
 
 Default release command builds a universal DMG so one artifact supports both Intel and Apple Silicon Macs.
 
+Note: branch `universal-dmg` was created to carry the change that makes the DMG `universal` by default.
+
 ## If You See "Application Is Not Supported On This Mac"
 
 This means the DMG architecture does not match the Mac CPU.

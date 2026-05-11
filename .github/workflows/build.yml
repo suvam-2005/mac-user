@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - universal-dmg
   workflow_dispatch:
 
 jobs:
